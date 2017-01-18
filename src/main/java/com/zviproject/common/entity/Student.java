@@ -1,11 +1,18 @@
 package com.zviproject.common.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "student", catalog = "Student")
@@ -26,6 +33,18 @@ public class Student implements java.io.Serializable {
 
 	@Column(name = "group_id")
 	private Integer groupId;
+
+	@OneToMany(mappedBy = "id_student", fetch = FetchType.EAGER)
+	@JsonManagedReference
+	Set<Mark> marksForStudent = new HashSet<>();
+
+	public Set<Mark> getMarksForStudent() {
+		return marksForStudent;
+	}
+
+	public void setMarksForStudent(Set<Mark> marksForStudent) {
+		this.marksForStudent = marksForStudent;
+	}
 
 	public Student() {
 	}

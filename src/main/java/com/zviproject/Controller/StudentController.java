@@ -1,6 +1,7 @@
 package com.zviproject.Controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zviproject.Service.StudentService;
+import com.zviproject.common.entity.Mark;
 import com.zviproject.common.entity.Student;
 
 @Configuration
@@ -75,5 +77,10 @@ public class StudentController {
 	public String add(@RequestBody Student student) {
 		studentService.add(student);
 		return "student was created";
+	}
+
+	@RequestMapping(value = "/marks/{id}", method = RequestMethod.GET)
+	public Set<Mark> getAllMarks(@PathVariable("id") int id) {
+		return studentService.getAllMarks(id);
 	}
 }
