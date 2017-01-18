@@ -11,6 +11,8 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
-        <mapping resource="com/zviproject/common/Stock.hbm.xml"></mapping>
+        <mapping class="com.zviproject.common.entity.Mark"></mapping>
+        <mapping class="com.zviproject.common.entity.Student"></mapping>
+       
     </session-factory>
 </hibernate-configuration>

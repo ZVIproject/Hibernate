@@ -1,18 +1,11 @@
 package com.zviproject.common.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
+import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "student", catalog = "Student")
@@ -20,45 +13,35 @@ public class Student implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_student", nullable = false)
+	private Integer id_student;
+
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "surname")
 	private String surname;
+
+	@Column(name = "group_id")
 	private Integer groupId;
-
-	private Set<Mark> marks = new HashSet<>();
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student", fetch = FetchType.EAGER)
-	public Set<Mark> getMarks() {
-		return marks;
-	}
-
-	public void addMarks(Mark mark) {
-		mark.setEmployee(this);
-		this.marks.add(mark);
-	}
-
-	public void setMarks(Set<Mark> marks) {
-		this.marks = marks;
-	}
 
 	public Student() {
 	}
 
-	public Student(Integer id, String stockCode, String stockName) {
-		this.id = id;
+	public Student(Integer id_student, String stockCode, String stockName) {
+		this.id_student = id_student;
 		this.name = stockCode;
 		this.surname = stockName;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false, insertable = true, updatable = true)
-	public Integer getId() {
-		return id;
+	public Integer getId_student() {
+		return id_student;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.id_student = id;
 	}
 
 	public String getName() {
