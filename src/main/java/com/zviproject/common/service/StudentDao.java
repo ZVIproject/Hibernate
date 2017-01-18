@@ -57,9 +57,7 @@ public class StudentDao implements IStudent {
 	public void add(Student student) {
 		try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
-			session.beginTransaction();
 			session.save(student);
-			session.getTransaction().commit();
 		} catch (Exception e) {
 			// Транзакція буде зупинена
 			throw e;
@@ -75,11 +73,11 @@ public class StudentDao implements IStudent {
 	public List<Student> informationAboutStudent() {
 		try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
-			session.beginTransaction();
+			// session.beginTransaction();
 			final String hql = "SELECT s FROM Student s";
 			Query query = session.createQuery(hql);
 			ArrayList<Student> student = (ArrayList<Student>) query.list();
-			session.getTransaction().commit();
+			// session.getTransaction().commit();
 
 			return student;
 		} catch (Exception e) {
@@ -113,12 +111,10 @@ public class StudentDao implements IStudent {
 	public void updateStudentById(Integer id, Student student) {
 		try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
-			// session.beginTransaction();
 			Student studentUpdate = (Student) session.get(Student.class, id);
 			studentUpdate.setName(student.getName());
 			studentUpdate.setSurname(student.getSurname());
 			session.update(studentUpdate);
-			// session.getTransaction().commit();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -132,7 +128,10 @@ public class StudentDao implements IStudent {
 	public Student searchById(int id) {
 		try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
 			Student student = (Student) session.get(Student.class, id);
+
+			session.getTransaction().commit();
 			return student;
 		} catch (Exception e) {
 

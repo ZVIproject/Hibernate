@@ -13,6 +13,7 @@
         <property name="show_sql">true</property>
         <mapping class="com.zviproject.common.entity.Mark"></mapping>
         <mapping class="com.zviproject.common.entity.Student"></mapping>
+        <mapping class="com.zviproject.common.entity.Subject"></mapping>
        
     </session-factory>
 </hibernate-configuration>
