@@ -2,10 +2,12 @@
 package com.zviproject.Service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zviproject.common.entity.Mark;
 import com.zviproject.common.entity.Student;
 import com.zviproject.common.interfacee.IStudent;
 
@@ -36,6 +38,10 @@ public class StudentService {
 
 	public Student searchById(int id) {
 		return iStudent.searchById(id);
+	}
+
+	public Set<Mark> getAllMarks(int id) {
+		return iStudent.getAllMarks(id);
 	}
 
 }
