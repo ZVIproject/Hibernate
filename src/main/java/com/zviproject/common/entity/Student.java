@@ -5,7 +5,9 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,80 +17,105 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+
+// @Audited
 @Table(name = "student", catalog = "Student")
-public class Student implements java.io.Serializable {
+public class Student {
 
-	private static final long serialVersionUID = 1L;
+	@Table(name = "student", catalog = "Student")
+	public class Student implements java.io.Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_student", nullable = false)
-	private Integer id_student;
+		private static final long serialVersionUID = 1L;
 
-	@Column(name = "name")
-	private String name;
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
 
-	@Column(name = "surname")
-	private String surname;
+		@Column(name = "id_student")
 
-	@Column(name = "group_id")
-	private Integer groupId;
+		@Column(name = "id_student", nullable = false)
 
-	@OneToMany(mappedBy = "id_student", fetch = FetchType.EAGER)
-	@JsonManagedReference
-	Set<Mark> marksForStudent = new HashSet<>();
+		private Integer id_student;
 
-	public Set<Mark> getMarksForStudent() {
-		return marksForStudent;
-	}
+		@Column(name = "name")
+		private String name;
 
-	public void setMarksForStudent(Set<Mark> marksForStudent) {
-		this.marksForStudent = marksForStudent;
-	}
+		@Column(name = "surname")
+		private String surname;
 
-	public Student() {
-	}
+		@Column(name = "group_id")
+		private Integer groupId;
 
-	public Student(Integer id_student, String stockCode, String stockName) {
+		@OneToMany(mappedBy = "id_student")
+		@JsonManagedReference(value = "marks")
+		// @NotAudited
+
+		@OneToMany(mappedBy = "id_student", fetch = FetchType.EAGER)
+		@JsonManagedReference
+
+		Set<Mark> marksForStudent = new HashSet<>();
+
+		public Set<Mark> getMarksForStudent() {
+			return marksForStudent;
+		}
+
+		public void setMarksForStudent(Set<Mark> marksForStudent) {
+			this.marksForStudent = marksForStudent;
+		}
+
+		public Student() {
+		}
+
+	public Student(Integer id_student, String stockCode, String stockName, Integer groupId) {
 		this.id_student = id_student;
 		this.name = stockCode;
 		this.surname = stockName;
-	}
-
-	public Integer getId_student() {
-		return id_student;
-	}
-
-	public void setId(Integer id) {
-		this.id_student = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public Integer getGroupId() {
-		return groupId;
-	}
-
-	public void setGroupId(Integer groupId) {
 		this.groupId = groupId;
-	}
+
+		public Student(Integer id_student, String stockCode, String stockName) {
+			this.id_student = id_student;
+			this.name = stockCode;
+			this.surname = stockName;
+
+		}
+
+		public Integer getId_student() {
+			return id_student;
+		}
+
+	public void setId_student(Integer id_student) {
+		this.id_student = id_student;
+
+		public void setId(Integer id) {
+			this.id_student = id;
+
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getSurname() {
+			return surname;
+		}
+
+		public void setSurname(String surname) {
+			this.surname = surname;
+		}
+
+		public static long getSerialversionuid() {
+			return serialVersionUID;
+		}
+
+		public Integer getGroupId() {
+			return groupId;
+		}
+
+		public void setGroupId(Integer groupId) {
+			this.groupId = groupId;
+		}
 
 }

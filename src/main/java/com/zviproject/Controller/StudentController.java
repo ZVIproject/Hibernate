@@ -1,7 +1,10 @@
 package com.zviproject.Controller;
 
 import java.util.List;
+<<<<<<< HEAD
+=======
 import java.util.Set;
+>>>>>>> origin/developer
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -12,11 +15,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zviproject.Service.StudentService;
+<<<<<<< HEAD
+import com.zviproject.common.entity.Student;
+
+@Configuration
+@RequestMapping("/zvi/student")
+=======
 import com.zviproject.common.entity.Mark;
 import com.zviproject.common.entity.Student;
 
 @Configuration
 @RequestMapping("/zvi")
+>>>>>>> origin/developer
 @RestController
 public class StudentController {
 
@@ -79,8 +89,19 @@ public class StudentController {
 		return "student was created";
 	}
 
+<<<<<<< HEAD
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public void test() {
+		studentService.test();
+	}
+
+	@RequestMapping(value = "/mark/{mark}", method = RequestMethod.GET)
+	public List<Student> getStudentMarks(@PathVariable("mark") int mark) {
+		return studentService.getStudentMarks(mark);
+=======
 	@RequestMapping(value = "/marks/{id}", method = RequestMethod.GET)
 	public Set<Mark> getAllMarks(@PathVariable("id") int id) {
 		return studentService.getAllMarks(id);
+>>>>>>> origin/developer
 	}
 }
