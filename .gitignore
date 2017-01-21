@@ -1,10 +1,16 @@
 .gradle
+<<<<<<< HEAD
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+=======
 /bin/
 /build/
 !gradle
 /wrapper/
 gradle-wrapper.jar
 /gradle/
+>>>>>>> origin/developer
 ### STS ###
 .apt_generated
 .classpath
@@ -12,11 +18,19 @@ gradle-wrapper.jar
 .project
 .settings
 .springBeans
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/developer
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/developer
 ### NetBeans ###
 nbproject/private/
 build/

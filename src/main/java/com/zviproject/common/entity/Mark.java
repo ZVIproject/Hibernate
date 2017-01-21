@@ -2,7 +2,10 @@ package com.zviproject.common.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+<<<<<<< HEAD
+=======
 import javax.persistence.FetchType;
+>>>>>>> origin/developer
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,10 +21,17 @@ public class Mark {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
+	@Column(name = "id")
+	private Integer id;
+
+	@ManyToOne
+=======
 	@Column(name = "id", nullable = false, insertable = true, updatable = true)
 	private Integer id;
 
 	@ManyToOne(targetEntity = Subject.class, fetch = FetchType.EAGER)
+>>>>>>> origin/developer
 	@JoinColumn(name = "id_subject")
 	@JsonBackReference
 	private Subject subject;
@@ -29,8 +39,13 @@ public class Mark {
 	@Column(name = "mark")
 	private Integer mark;
 
+<<<<<<< HEAD
+	@ManyToOne
+	@JsonBackReference(value = "marks")
+=======
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonBackReference
+>>>>>>> origin/developer
 	@JoinColumn(name = "id_student")
 	private Student id_student;
 

@@ -11,7 +11,11 @@ public interface IStudent {
 
 	public List<Student> informationAboutStudent();
 
+<<<<<<< HEAD
+	public void removeById(int id_student);
+=======
 	public void removeById(int id);
+>>>>>>> origin/developer
 
 	public void updateStudentById(Integer id, Student student);
 
@@ -19,4 +23,11 @@ public interface IStudent {
 
 	public Set<Mark> getAllMarks(int id);
 
+<<<<<<< HEAD
+	public void test();
+
+	public List<Student> getStudentMarks(int mark);
+
+=======
+>>>>>>> origin/developer
 }
