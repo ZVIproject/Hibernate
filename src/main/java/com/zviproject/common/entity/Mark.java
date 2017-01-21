@@ -21,8 +21,10 @@ public class Mark {
 	@Column(name = "id", nullable = false, insertable = true, updatable = true)
 	private Integer id;
 
-	@Column(name = "id_subject")
-	private Integer id_subject;
+	@ManyToOne(targetEntity = Subject.class, fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_subject")
+	@JsonBackReference
+	private Subject subject;
 
 	@Column(name = "mark")
 	private Integer mark;
@@ -48,20 +50,20 @@ public class Mark {
 		this.id = id;
 	}
 
-	public Integer getid_subject() {
-		return id_subject;
-	}
-
-	public void setid_subject(Integer id_subject) {
-		this.id_subject = id_subject;
-	}
-
 	public Integer getMark() {
 		return mark;
 	}
 
 	public void setMark(Integer mark) {
 		this.mark = mark;
+	}
+
+	public Subject getId_subject() {
+		return subject;
+	}
+
+	public void setId_subject(Subject id_subject) {
+		this.subject = id_subject;
 	}
 
 }
