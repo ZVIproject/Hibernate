@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,7 @@ import com.zviproject.Service.StudentService;
 import com.zviproject.common.entity.Student;
 
 @Configuration
-@RequestMapping("/zvi")
+@RequestMapping("/zvi/student")
 @RestController
 public class StudentController {
 
@@ -71,9 +72,20 @@ public class StudentController {
 	 * @param bike
 	 * @return
 	 */
+	@Transactional(readOnly = false)
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String add(@RequestBody Student student) {
 		studentService.add(student);
 		return "student was created";
+	}
+
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public void test() {
+		studentService.test();
+	}
+
+	@RequestMapping(value = "/mark/{mark}", method = RequestMethod.GET)
+	public List<Student> getStudentMarks(@PathVariable("mark") int mark) {
+		return studentService.getStudentMarks(mark);
 	}
 }

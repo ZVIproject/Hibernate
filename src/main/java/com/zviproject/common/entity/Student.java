@@ -3,62 +3,69 @@ package com.zviproject.common.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@Audited
 @Table(name = "student", catalog = "Student")
-public class Student implements java.io.Serializable {
+public class Student {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_student")
+	private Integer id_student;
+
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "surname")
 	private String surname;
+
+	@Column(name = "group_id")
 	private Integer groupId;
 
-	private Set<Mark> marks = new HashSet<>();
+	@OneToMany(mappedBy = "id_student")
+	@JsonManagedReference(value = "marks")
+	@NotAudited
+	Set<Mark> marksForStudent = new HashSet<>();
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student", fetch = FetchType.EAGER)
-	public Set<Mark> getMarks() {
-		return marks;
+	public Set<Mark> getMarksForStudent() {
+		return marksForStudent;
 	}
 
-	public void addMarks(Mark mark) {
-		mark.setEmployee(this);
-		this.marks.add(mark);
-	}
-
-	public void setMarks(Set<Mark> marks) {
-		this.marks = marks;
+	public void setMarksForStudent(Set<Mark> marksForStudent) {
+		this.marksForStudent = marksForStudent;
 	}
 
 	public Student() {
 	}
 
-	public Student(Integer id, String stockCode, String stockName) {
-		this.id = id;
+	public Student(Integer id_student, String stockCode, String stockName, Integer groupId) {
+		this.id_student = id_student;
 		this.name = stockCode;
 		this.surname = stockName;
+		this.groupId = groupId;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false, insertable = true, updatable = true)
-	public Integer getId() {
-		return id;
+	public Integer getId_student() {
+		return id_student;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId_student(Integer id_student) {
+		this.id_student = id_student;
 	}
 
 	public String getName() {
@@ -75,10 +82,6 @@ public class Student implements java.io.Serializable {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	public Integer getGroupId() {
