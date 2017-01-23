@@ -38,4 +38,12 @@ public class StudentService {
 		return iStudent.searchById(id);
 	}
 
+	public void test() {
+		iStudent.test();
+	}
+
+	public List<Student> getStudentMarks(int mark) {
+		return iStudent.getStudentMarks(mark);
+	}
+
 }

@@ -1,29 +1,44 @@
 package com.zviproject.common.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "marks", catalog = "Student")
 public class Mark {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Integer id;
-	private Integer idSubject;
-	private Integer idStudent;
+
+	@ManyToOne
+	@JoinColumn(name = "id_subject")
+	@JsonBackReference
+	private Subject subject;
+
+	@Column(name = "mark")
 	private Integer mark;
 
-	private Student student;
+	@ManyToOne
+	@JsonBackReference(value = "marks")
+	@JoinColumn(name = "id_student")
+	private Student id_student;
 
-	@ManyToOne // (fetch = FetchType.EAGER, cascade = { CascadeType.MERGE,
-				// CascadeType.PERSIST })
-	@JoinColumn(name = "id_student", referencedColumnName = "id") // nullable =
-	public Student getStudent() {
-		return this.student; // false)
+	public Student getId_student() {
+		return id_student;
 	}
 
-	public void setEmployee(Student student) {
-		this.student = student;
+	public void setId_student(Student id_student) {
+		this.id_student = id_student;
 	}
 
 	public Integer getId() {
@@ -34,28 +49,20 @@ public class Mark {
 		this.id = id;
 	}
 
-	public Integer getIdSubject() {
-		return idSubject;
-	}
-
-	public void setIdSubject(Integer idSubject) {
-		this.idSubject = idSubject;
-	}
-
-	public Integer getIdStudent() {
-		return idStudent;
-	}
-
-	public void setIdStudent(Integer idStudent) {
-		this.idStudent = idStudent;
-	}
-
 	public Integer getMark() {
 		return mark;
 	}
 
 	public void setMark(Integer mark) {
 		this.mark = mark;
+	}
+
+	public Subject getId_subject() {
+		return subject;
+	}
+
+	public void setId_subject(Subject id_subject) {
+		this.subject = id_subject;
 	}
 
 }
